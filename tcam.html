@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de TCAM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px #aaa;
+            margin-bottom: 20px;
+        }
+        input, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .nav-button {
+            background-color: #f0ad4e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            display: block;
+            margin: auto;
+            width: 200px;
+            border-radius: 5px;
+        }
+        .nav-button:hover {
+            background-color: #ec971f;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container link">
+    <button class="nav-button" onclick="window.location.href='index.html'">Calculateur de TRI</button>
+</div>
+
+<div class="container">
+    <h2>Calculateur de TCAM</h2>
+    <label for="startYear">Année de départ:</label>
+    <input type="number" id="startYear" name="startYear">
+    
+    <label for="startValue">Donnée de départ:</label>
+    <input type="number" id="startValue" name="startValue">
+    
+    <label for="endYear">Année de fin:</label>
+    <input type="number" id="endYear" name="endYear">
+    
+    <label for="endValue">Donnée de fin:</label>
+    <input type="number" id="endValue" name="endValue">
+    
+    <button onclick="calculateCAGR()">Calculer le TCAM</button>
+    
+    <p id="result"></p>
+</div>
+
+<div class="container">
+    <h2>Définition du TCAM</h2>
+    <p>Le Taux de Croissance Annuel Moyen (TCAM) est une mesure utilisée pour déterminer la moyenne annuelle de croissance d'un investissement sur une période donnée. Il lisse les fluctuations de croissance sur plusieurs années pour fournir une image plus précise du taux de croissance moyen.</p>
+    <h3>Méthode de calcul du TCAM</h3>
+    <p>Pour calculer le TCAM, nous utilisons la formule suivante :</p>
+    <p><strong>TCAM = [(Valeur finale / Valeur initiale) ^ (1 / Nombre d'années)] - 1</strong></p>
+    <p>Où :</p>
+    <ul>
+        <li><strong>Valeur initiale</strong> est la valeur de départ de l'investissement.</li>
+        <li><strong>Valeur finale</strong> est la valeur de fin de l'investissement.</li>
+        <li><strong>Nombre d'années</strong> est la durée de l'investissement en années.</li>
+    </ul>
+</div>
+
+<script>
+function calculateCAGR() {
+    // Récupérer les valeurs saisies par l'utilisateur
+    const startYear = parseFloat(document.getElementById('startYear').value);
+    const startValue = parseFloat(document.getElementById('startValue').value);
+    const endYear = parseFloat(document.getElementById('endYear').value);
+    const endValue = parseFloat(document.getElementById('endValue').value);
+    
+    // Calculer le nombre d'années entre le début et la fin
+    const numYears = endYear - startYear;
+    
+    // Calculer le TCAM
+    const cagr = Math.pow((endValue / startValue), (1 / numYears)) - 1;
+    
+    // Afficher le résultat en gras
+    document.getElementById('result').innerHTML = `Le TCAM est de <strong>${(cagr * 100).toFixed(2)}%</strong>`;
+}
+</script>
+
+</body>
+</html>
